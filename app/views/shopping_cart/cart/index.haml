@@ -1,0 +1,81 @@
+%h1.general-title-margin Cart
+- if @items.count == 0
+  %br
+  %h1= t('cart.empty_cart')
+  %br
+  .text-center
+    = link_to t('cart.back_to_store'), root_path, class: 'btn btn-default mb-20'
+- else    
+  .visible-xs
+    - @items.each do |item|
+      .general-cart-item.divider-lg-bottom.mb-30
+        = link_to(cart_path(book_id: item.id), method: :delete, class: 'close general-cart-close', 'aria-label': "Close") do
+          %span{'aria-hidden': "true"} &times;
+        .general-img-wrap-table
+          = cl_image_tag(item.decorate.root_image, class: 'cart-img-shadow')
+        %p.title= item.decorate.title
+        %table.table
+          %tr
+            %td
+              %span.in-grey-600 Price
+            %td
+              %span.font-16.in-gold-500= "€#{item.decorate.price}"
+          %tr
+            %td.vertical-middle
+              %span.in-grey-600 Quantity
+            %td
+              .input-group
+                = link_to cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                  %i.fa.fa-minus.line-heaght-40
+                %input.form-control.quantity-input{type: "text", value: item.decorate.quantity_in_cart(@order)}
+                = link_to cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                  %i.fa.fa-plus.line-heaght-40
+          %tr
+            %td
+              %span.in-grey-600 SubTotal
+            %td
+              %span.font-16.in-gold-500= "€#{item.decorate.total_price(@order)}"
+  .hidden-xs
+    %table.table.table-hover
+      %tr.no-hover
+        %th.col-pic.pl-0
+          %span.in-grey-600= t('cart.product')
+        %th.col-title
+        %th.col-price
+          %span.in-grey-600= t('cart.price')
+        %th.col-quantity
+          %span.in-grey-600= t('cart.quantity') 
+        %th.col-total
+          %span.in-grey-600= t('cart.subtotal')
+        %th.col-close
+      - @items.each do |item|    
+        %tr
+          %td
+            .general-img-wrap-table
+              = cl_image_tag(item.decorate.root_image, class: 'cart-img-shadow pull-left')
+          %td
+            %p.title= item.decorate.title
+          %td
+            %span.font-16.in-gold-500= "€#{item.decorate.price}"
+          %td
+            .input-group
+              = link_to cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                %i.fa.fa-minus.line-heaght-40
+              %input.form-control.quantity-input{type: "text", value: item.decorate.quantity_in_cart(@order)}
+              = link_to cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                %i.fa.fa-plus.line-heaght-40
+          %td
+            %span.font-16.in-gold-500= "€#{item.decorate.total_price(@order)}"
+          %td
+            = link_to(cart_path(book_id: item.id), method: :delete, class: 'close general-cart-close', 'aria-label': "Close") do
+              %span{'aria-hidden': "true"} &times;
+  .general-order-wrap
+    .row
+      .col-sm-4
+        - if @order.coupon
+          %h3= t('coupon.used')
+        - else
+          = render 'coupon'
+      = render 'order_summary', order: @order
+  = link_to checkout_address_path, method: :put do
+    %button.btn.btn-default.mb-20.hidden-xs.center-block Checkout

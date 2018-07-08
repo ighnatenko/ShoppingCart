@@ -1,0 +1,88 @@
+%h1.general-title-margin= t('checkout.checkout')
+= render 'steps', step: :confirm
+.row.mb-20
+  - @order.addresses.each do |address|
+    .col-sm-3
+      %h3.general-subtitle= "#{address.address_type.capitalize} #{t('checkout.address')}"
+      %p.general-address
+        = "#{address.firstname} #{address.lastname}"
+        %span
+          = link_to 'edit', checkout_address_path, class: 'general-edit', method: :put
+        %br
+        = address.address
+        %br
+        = "#{address.city} #{address.zipcode}"
+        %br
+        = address.country
+        %br
+        = "Phone #{address.phone}"
+  .col-sm-3
+    %h3.general-subtitle= t('checkout.shipments')
+    %p.general-address
+      = @order.delivery.title
+      %span
+        = link_to 'edit', checkout_delivery_path, class: 'general-edit', method: :put
+      %br
+      = @order.delivery.days
+  .col-sm-3
+    %h3.general-subtitle= t('checkout.payment_info')  
+    %p.general-address
+      = "** ** ** #{@order.credit_card.number.last(4)}"
+      %span
+        = link_to 'edit', checkout_payment_path, class: 'general-edit', method: :put
+      %br
+      = @order.credit_card.expiration_date
+.visible-xs
+  - @order.books.each do |book|
+    .general-cart-item.divider-lg
+      .general-img-wrap-table
+        = cl_image_tag(book.decorate.root_image, class: 'cart-img-shadow')
+      %p.title= book.title
+      %P.in-grey-600.fw-300= book.description
+      %table.table
+        %tr
+          %td
+            %span.in-grey-600= t('books.book')
+          %td
+            %span.font-16.in-gold-500= "€#{book.price}"
+        %tr
+          %td.vertical-middle
+            %span.in-grey-600= t('cart.quantity')
+          %td
+            %span= book.decorate.quantity_in_cart(@order)
+        %tr
+          %td
+            %span.in-grey-600= t('cart.subtotal')
+          %td
+            %span.font-16.in-gold-500= "€#{book.decorate.total_price(@order)}"
+.hidden-xs.divider-lg.pt-20
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= t('books.book')
+        %th.col-method
+        %th
+          %span.in-grey-600= t('cart.price')
+        %th
+          %span.in-grey-600= t('cart.quantity')
+        %th
+          %span.in-grey-600= t('cart.total')
+    %tbody
+      - @order.books.each do |book|
+        %tr
+          %td
+            .general-img-wrap-table
+              = cl_image_tag(book.decorate.root_image, class: 'cart-img-shadow pull-left')
+          %td
+            %p.title= book.title
+            %p.in-grey-600.fw-300= book.description
+          %td
+            %span.font-16.in-gold-500= "€#{book.price}"
+          %td
+            %span.ml-30= book.decorate.quantity_in_cart(@order)
+          %td
+            %span.font-16.in-gold-500= "€#{book.decorate.total_price(@order)}"
+= render 'order_summary', order: @order
+.text-center
+  = link_to 'Place Order', checkout_complete_path, class: 'btn btn-default mb-20', method: :put

@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'draper', '~> 3.0', '>= 3.0.1'
   s.add_dependency 'rails-i18n'
 
-  s.add_dependency  'faker', '~> 1.6', '>= 1.6.3'
+  s.add_dependency 'faker', '~> 1.6', '>= 1.6.3'
   s.add_dependency 'pry', '~> 0.11.3'
   s.add_dependency 'rspec-rails', '~> 3.7'
   s.add_dependency 'database_cleaner', '~> 1.6', '>= 1.6.2'

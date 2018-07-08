@@ -1,0 +1,18 @@
+.general-text-align
+  %p.in-gold-500.font-18= t('cart.order_summary')
+  %table.general-summary-table
+    %tr
+      %td
+        %p.font-16= "#{t('cart.subtotal')}:"
+      %td
+        %p.font-16= "€#{order.decorate.subtotal}"
+    %tr
+      %td
+        %p.font-16= "#{t('cart.coupon')}:"
+      %td
+        %p.font-16= "€#{order.decorate.coupon_discount}"
+    %tr
+      %td
+        %strong.font-18= "#{t('cart.order_total')}:"
+      %td
+        %strong.font-18= "€#{order.decorate.order_total}"

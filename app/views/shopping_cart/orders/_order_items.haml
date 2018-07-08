@@ -1,0 +1,55 @@
+.visible-xs
+  .general-cart-item.divider-lg-bottom.pt-0
+    %table.table
+      - orders.each do |item|
+        %tr
+          %td.col-half
+            %span.in-grey-600= t('orders.number')
+          %td.col-half
+            - if item.in_progress?
+              %span.general-order-number= item.tracking_number
+            - else
+              %span.general-order-number= link_to(item.tracking_number, order_path(item))
+        %tr
+          %td
+            %span.in-grey-600= t('orders.completed_at')
+          %td
+            %span.in-grey-900.font-16.fw-300= item.created_at.strftime('%Y-%m-%d')
+        %tr
+          %td
+            %span.in-grey-600= t('orders.status')
+          %td
+            %span.font-16.fw-300{class: (item.state.to_s == 'delivered' ? 'text-success' : 'in-grey-900')}
+              = item.state.to_s.tr('_', ' ').capitalize
+        %tr
+          %td
+            %span.in-grey-600= t('cart.total') 
+          %td
+            %strong.font-16= "€#{item.decorate.order_total}"
+.hidden-xs.mb-res-50
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= t('orders.number')
+        %th
+          %span.in-grey-600= t('orders.completed_at')
+        %th
+          %span.in-grey-600= t('orders.status')
+        %th
+          %span.in-grey-600= t('cart.total')
+    %tbody
+      - orders.each do |item|
+        %tr
+          %td
+            - if item.in_progress?
+              %span.general-order-number= item.tracking_number
+            - else
+              %span.general-order-number= link_to(item.tracking_number, order_path(item))
+          %td
+            %span.in-grey-900.font-16.fw-300= item.created_at.strftime('%Y-%m-%d')
+          %td
+            %span.font-16.fw-300{class: (item.state.to_s == 'delivered' ? 'text-success' : 'in-grey-900')}
+              = item.state.to_s.tr('_', ' ').capitalize
+          %td
+            %strong.font-16= "€#{item.decorate.order_total}"

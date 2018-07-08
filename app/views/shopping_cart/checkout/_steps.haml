@@ -1,0 +1,20 @@
+%ul.steps.list-inline
+  %li{class: (step == :address ? 'step active' : 'step') }
+    %span.step-number 1
+    %span.step-text.hidden-xs= t('checkout.address')
+  %li.step-divider
+  %li{class: (step == :delivery ? 'step active' : 'step') }
+    %span.step-number 2
+    %span.step-text.hidden-xs= t('checkout.delivery')
+  %li.step-divider
+  %li{class: (step == :payment ? 'step active' : 'step') }
+    %span.step-number 3
+    %span.step-text.hidden-xs= t('checkout.payment')
+  %li.step-divider
+  %li{class: (step == :confirm ? 'step active' : 'step') }
+    %span.step-number 4
+    %span.step-text.hidden-xs= t('checkout.confirm')
+  %li.step-divider
+  %li{class: (step == :complete ? 'step active' : 'step') }
+    %span.step-number 5
+    %span.step-text.hidden-xs= t('checkout.complete')
