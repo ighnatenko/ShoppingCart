@@ -1,7 +1,7 @@
 module ShoppingCart
   class Order < ApplicationRecord
     include AASM
-    belongs_to :user, optional: true, ShoppingCart.user_class
+    belongs_to :user, optional: true, class_name: ShoppingCart.user_class
     has_many :addresses, as: :addressable, dependent: :destroy
     has_one :credit_card, as: :cardable, dependent: :destroy, class_name: 'ShoppingCart::CreditCard'
     has_many :positions, class_name: 'ShoppingCart::Position'
