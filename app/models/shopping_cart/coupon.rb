@@ -1,4 +1,5 @@
 module ShoppingCart
+  # Coupon
   class Coupon < ApplicationRecord
     belongs_to :order, optional: true, class_name: 'ShoppingCart::Order'
     validates :code, :discount, presence: true

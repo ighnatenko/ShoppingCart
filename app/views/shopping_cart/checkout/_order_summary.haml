@@ -13,6 +13,11 @@
         %p.font-16= "€#{order.decorate.coupon_discount}"
     %tr
       %td
+        %p.font-16= "#{t('cart.shipping')}:"
+      %td
+        %p.font-16.summary-shipping= "€#{order.decorate.shipping}"    
+    %tr
+      %td
         %strong.font-18= "#{t('cart.order_total')}:"
       %td
-        %strong.font-18= "€#{order.decorate.order_total}"
+        %strong.font-18.summary-total= "€#{order.decorate.order_total}"

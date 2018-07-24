@@ -1,20 +1,10 @@
 %ul.steps.list-inline
-  %li{class: (step == :address ? 'step active' : 'step') }
-    %span.step-number 1
-    %span.step-text.hidden-xs= t('checkout.address')
+  = render 'step_li', step: 1, step_number: number, step_name: t('checkout.address')
   %li.step-divider
-  %li{class: (step == :delivery ? 'step active' : 'step') }
-    %span.step-number 2
-    %span.step-text.hidden-xs= t('checkout.delivery')
+  = render 'step_li', step: 2, step_number: number, step_name: t('checkout.delivery')
   %li.step-divider
-  %li{class: (step == :payment ? 'step active' : 'step') }
-    %span.step-number 3
-    %span.step-text.hidden-xs= t('checkout.payment')
+  = render 'step_li', step: 3, step_number: number, step_name: t('checkout.payment')
   %li.step-divider
-  %li{class: (step == :confirm ? 'step active' : 'step') }
-    %span.step-number 4
-    %span.step-text.hidden-xs= t('checkout.confirm')
+  = render 'step_li', step: 4, step_number: number, step_name: t('checkout.confirm')
   %li.step-divider
-  %li{class: (step == :complete ? 'step active' : 'step') }
-    %span.step-number 5
-    %span.step-text.hidden-xs= t('checkout.complete')
+  = render 'step_li', step: 5, step_number: number, step_name: t('checkout.complete')

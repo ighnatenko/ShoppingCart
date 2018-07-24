@@ -17,5 +17,9 @@
           %strong.font-18= "#{t('cart.order_total')}:"
         %td
           %strong.font-18= "€#{order.decorate.order_total}"
-    = link_to checkout_address_path do        
-      %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart.checkout')
+    - if user_signed_in?      
+      = link_to checkout_index_path do        
+        %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart.checkout')
+    - else
+      = link_to customer_index_path do        
+        %button.btn.btn-default.mb-20.visible-xs-inline-block= t('cart.checkout')        

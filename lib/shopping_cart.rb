@@ -1,13 +1,13 @@
-require "shopping_cart/engine"
+require 'shopping_cart/engine'
 
+# ShoppingCart
 module ShoppingCart
   mattr_accessor :user_class
-  @@user_class = 'User'
-
   mattr_accessor :book_class
-  @@book_class = 'Book'
-
   mattr_accessor :parent_controller
+
+  @@user_class = 'User'
+  @@book_class = 'Book'
   @@parent_controller = 'ApplicationController'
 
   def self.setup

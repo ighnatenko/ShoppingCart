@@ -1,0 +1,13 @@
+- if step < step_number
+  %li.step.done
+    %span.step-number
+      %i.fa.fa-check.step-icon
+    %span.step-text.hidden-xs= step_name
+- elsif step == step_number
+  %li.step.active
+    %span.step-number= step
+    %span.step-text.hidden-xs= step_name
+- else
+  %li.step
+    %span.step-number= step
+    %span.step-text.hidden-xs= step_name

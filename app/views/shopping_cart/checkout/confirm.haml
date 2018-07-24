@@ -1,5 +1,5 @@
 %h1.general-title-margin= t('checkout.checkout')
-= render 'steps', step: :confirm
+= render 'steps', number: 4
 .row.mb-20
   - @order.addresses.each do |address|
     .col-sm-3
@@ -7,7 +7,7 @@
       %p.general-address
         = "#{address.firstname} #{address.lastname}"
         %span
-          = link_to 'edit', checkout_address_path, class: 'general-edit', method: :put
+          = link_to t('checkout.edit'), wizard_path(:address), class: 'general-edit'
         %br
         = address.address
         %br
@@ -21,7 +21,7 @@
     %p.general-address
       = @order.delivery.title
       %span
-        = link_to 'edit', checkout_delivery_path, class: 'general-edit', method: :put
+        = link_to t('checkout.edit'), wizard_path(:delivery), class: 'general-edit'
       %br
       = @order.delivery.days
   .col-sm-3
@@ -29,7 +29,7 @@
     %p.general-address
       = "** ** ** #{@order.credit_card.number.last(4)}"
       %span
-        = link_to 'edit', checkout_payment_path, class: 'general-edit', method: :put
+        = link_to t('checkout.edit'), wizard_path(:payment), class: 'general-edit'
       %br
       = @order.credit_card.expiration_date
 .visible-xs
@@ -85,4 +85,4 @@
             %span.font-16.in-gold-500= "€#{book.decorate.total_price(@order)}"
 = render 'order_summary', order: @order
 .text-center
-  = link_to 'Place Order', checkout_complete_path, class: 'btn btn-default mb-20', method: :put
+  = link_to t('checkout.place_order'), wizard_path, method: :put, class: 'btn btn-default mb-20'

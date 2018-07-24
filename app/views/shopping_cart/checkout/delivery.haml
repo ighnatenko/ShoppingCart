@@ -1,18 +1,21 @@
 %h1.general-title-margin= t('checkout.checkout')
-= render 'steps', step: :delivery
+= render 'steps', number: 2
 %h3.general-subtitle= t('cart.credit_card.title')
 .visible-xs
   .general-cart-item.divider-lg-bottom.mb-30
-    = form_tag(checkout_payment_path, method: :put) do
+    = form_tag(wizard_path, method: :put) do
       %table.table
-        - @deliveries.each do |delivery|
+        - @delivery_service.deliveries.each do |delivery|
           %tr
             %td.col-half
               %span.in-grey-600= t('cart.credit_card.method')
             %td.col-half
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = radio_button_tag(:delivery, delivery.id, @order.delivery&.id == delivery.id, class: 'radio-input', hidden: "true", require: 'true' )
+                  = radio_button_tag(:delivery, delivery.id, @order.delivery&.id == delivery.id,
+                  class: 'radio-input delivery_row', hidden: "true", require: 'true',
+                  delivery_price: delivery.price, 
+                  total: @order.decorate.total_without_delivery)
                   %span.radio-icon
                   %span.radio-text= delivery.title
           %tr
@@ -26,9 +29,9 @@
             %td
               %span.font-16.in-gold-500="€#{delivery.price}"
       .text-center        
-        = submit_tag('Save and Continue', class: 'btn btn-default mb-20')
+        = submit_tag(t('checkout.save'), class: 'btn btn-default mb-20')
 .hidden-xs.mb-res-50
-  = form_tag(checkout_payment_path, method: :put) do
+  = form_tag(wizard_path, method: :put) do
     %table.table.table-hover
       %thead
         %tr
@@ -39,12 +42,14 @@
           %th
             %span.in-grey-600= t('cart.price')
       %tbody
-        - @deliveries.each do |delivery|
+        - @delivery_service.deliveries.each do |delivery|
           %tr
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = radio_button_tag(:delivery, delivery.id, @order.delivery&.id == delivery.id, class: 'radio-input', hidden: "true", require: 'true' )
+                  = radio_button_tag(:delivery, delivery.id, @order.delivery&.id == delivery.id, 
+                  class: 'radio-input delivery_row', hidden: "true", require: 'true', delivery_price: delivery.price, 
+                  total: @order.decorate.total_without_delivery)
                   %span.radio-icon
                   %span.radio-text= delivery.title
             %td
@@ -53,4 +58,4 @@
               %span.font-16.in-gold-500="€#{delivery.price}"
     = render 'order_summary', order: @order
     .text-center
-      = submit_tag('Save and Continue', class: 'btn btn-default mb-20', id: 'deliveries-submit-btn')
+      = submit_tag(t('checkout.save'), class: 'btn btn-default mb-20', id: 'deliveries-submit-btn')

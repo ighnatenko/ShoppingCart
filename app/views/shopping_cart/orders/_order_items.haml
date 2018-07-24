@@ -20,10 +20,10 @@
             %span.in-grey-600= t('orders.status')
           %td
             %span.font-16.fw-300{class: (item.state.to_s == 'delivered' ? 'text-success' : 'in-grey-900')}
-              = item.state.to_s.tr('_', ' ').capitalize
+              = t("orders.#{item.state.to_s}")
         %tr
           %td
-            %span.in-grey-600= t('cart.total') 
+            %span.in-grey-600= t('cart.total')
           %td
             %strong.font-16= "€#{item.decorate.order_total}"
 .hidden-xs.mb-res-50
@@ -50,6 +50,6 @@
             %span.in-grey-900.font-16.fw-300= item.created_at.strftime('%Y-%m-%d')
           %td
             %span.font-16.fw-300{class: (item.state.to_s == 'delivered' ? 'text-success' : 'in-grey-900')}
-              = item.state.to_s.tr('_', ' ').capitalize
+              = t("orders.#{item.state.to_s}")
           %td
             %strong.font-16= "€#{item.decorate.order_total}"

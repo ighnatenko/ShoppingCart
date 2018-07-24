@@ -1,24 +1,24 @@
 %h1.general-title-margin= t('checkout.checkout')
-= render 'steps', step: :payment
+= render 'steps', number: 3
 %h3.general-subtitle= t('cart.credit_card.title')
-= form_tag(checkout_confirm_path, class: 'max-600 mb-80', method: :put) do
-  = simple_fields_for(:credit_card, @credit_card) do |f|
+= form_tag(wizard_path, method: :put, class: 'max-600 mb-80') do
+  = simple_fields_for(:credit_card, @payment_service.credit_card) do |f|
     .form-group
-      = f.input :number, input_html: { class: 'form-control' }, label: 'Card Number',
-      placeholder: "Card Number", label_html: { class: 'control-label input-label' }
+      = f.input :number, input_html: { class: 'form-control' }, label: t('checkout.card_number'),
+      placeholder: t('checkout.card_number'), label_html: { class: 'control-label input-label' }
     .row
       .col-sm-6
         .form-group
-          = f.input :card_name, input_html: { class: 'form-control' }, label: 'Name on Card',
-          placeholder: "Name on Card", label_html: { class: 'control-label input-label' }
+          = f.input :card_name, input_html: { class: 'form-control' }, label: t('checkout.card_name'),
+          placeholder: t('checkout.card_name'), label_html: { class: 'control-label input-label' }
       .col-sm-3
         .form-group
-          = f.input :expiration_date, input_html: { class: 'form-control' }, label: "MM / YY",
-          placeholder: "MM / YY", label_html: { class: 'control-label input-label' }
+          = f.input :expiration_date, input_html: { class: 'form-control' }, label: t('checkout.expiration_date'),
+          placeholder: t('checkout.expiration_date'), label_html: { class: 'control-label input-label' }
       .col-sm-3
         .form-group.relative
-          = f.input :cvv, input_html: { class: 'form-control' }, label: "CVV",
-          placeholder: "CVV", label_html: { class: 'control-label input-label' }
-          %i.fa.fa-question-circle.general-form-help
+          = f.input :cvv, input_html: { class: 'form-control' }, label: t('checkout.cvv'),
+          placeholder: t('checkout.cvv'), label_html: { class: 'control-label input-label' }
+          %i.fa.fa-question-circle.general-form-help{'data-toggle': 'tooltip', 'data-placement': :top, title: t('checkout.cvv_tooltip')}
   = render 'order_summary', order: @order
-  = submit_tag 'Save and Continue', class:'btn btn-default center-block mb-20'
+  = submit_tag t('checkout.save'), class:'btn btn-default center-block mb-20'

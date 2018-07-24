@@ -1,17 +1,26 @@
 module ShoppingCart
+  # Order
   class Order < ApplicationRecord
     include AASM
-    belongs_to :user, optional: true, class_name: ShoppingCart.user_class
+    belongs_to :user, optional: true, class_name: ShoppingCart.user_class.to_s
     has_many :addresses, as: :addressable, dependent: :destroy
-    has_one :credit_card, as: :cardable, dependent: :destroy, class_name: 'ShoppingCart::CreditCard'
+    has_one :credit_card, as: :cardable, dependent: :destroy,
+                          class_name: 'ShoppingCart::CreditCard'
     has_many :positions, class_name: 'ShoppingCart::Position'
-    has_many :books, through: :positions, dependent: :destroy, class_name: ShoppingCart.book_class
-    belongs_to :delivery, optional: true, class_name: 'ShoppingCart::Delivery'
+    has_many :books, through: :positions, dependent: :destroy,
+                     class_name: ShoppingCart.book_class.to_s
+    belongs_to :delivery, optional: true,
+                          class_name: 'ShoppingCart::Delivery'
     has_one :coupon, class_name: 'ShoppingCart::Coupon'
-    
+
     validates :tracking_number, :state, presence: true
-    
-    scope :newest, -> { order('created_at DESC') }
+
+    scope :newest, (lambda do
+      joins(:books)
+      .group('orders.id')
+      .having('count(books) > 0')
+      .order('created_at DESC')
+    end)
     scope :by_state, ->(state) { where(state: state) }
 
     aasm column: :state do
@@ -33,10 +42,9 @@ module ShoppingCart
     end
 
     def set_confirmation_token
-      if self.confirmation_token.blank?
-        self.confirmation_token = SecureRandom.urlsafe_base64.to_s
-        self.save(validate: false)
-      end
+      return unless confirmation_token.blank?
+      self.confirmation_token = SecureRandom.urlsafe_base64.to_s
+      save(validate: false)
     end
 
     def send_confirmation
