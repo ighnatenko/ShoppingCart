@@ -1,6 +1,6 @@
 %h1.general-title-margin= t('checkout.checkout')
 = render 'steps', number: 1
-= form_tag(wizard_path, method: :put, class: 'res-mb-100') do
+= simple_form_for(@form, url: wizard_path, method: :put, class: 'res-mb-100') do |ff|
   .hidden-xs.hidden-sm
     .row
       .col-md-5
@@ -13,19 +13,20 @@
       .visible-xs.visible-sm
         %h3.general-subtitle= t('checkout.billing_address')
         %p.general-info-text= t('checkout.required')
-      = simple_fields_for :billing_address, @address_service.billing_address do |address|
-        = render 'shared/address_form', f: address, address_type: :billing, visible_submit_btn: false
+      = ff.fields_for :billing_form, @form.billing_address do |address|
+        = render 'shared/address_form', f: address, ff: ff, address_type: :billing, visible_submit_btn: false
     .col-md-5.col-md-offset-1.mb-60
       #checkout_shipping_address{class: (@order.use_billing ? 'hidden' : '')} 
         .visible-xs.visible-sm
           %h3.general-subtitle= t('checkout.shipping_address')
-        = simple_fields_for :shipping_address, @address_service.shipping_address do |address|
-          = render 'shared/address_form', f: address, address_type: :shipping, visible_submit_btn: false
+        = ff.fields_for :shipping_form, @form.shipping_address do |address|
+          = render 'shared/address_form', f: address, ff: ff, address_type: :shipping, visible_submit_btn: false
       .form-group.checkbox
         %label.checkbox-label
           = check_box_tag :use_billing, true, @order.use_billing, hidden: true, class: 'checkbox-input', id: 'checkout_use_billing'
+          -# = ff.check_box :use_billing, {class: "checkbox-input", hidden: 'true', id: 'checkout_use_billing'}, true, false
           %span.checkbox-icon
             %i.fa.fa-check
           %span.checkbox-text= t('checkout.use_billing_adress')
   = render 'order_summary', order: @order
-  = submit_tag t('checkout.save'), class:'btn btn-default center-block mb-20'
+  = ff.submit t('checkout.save'), class:'btn btn-default center-block mb-20'

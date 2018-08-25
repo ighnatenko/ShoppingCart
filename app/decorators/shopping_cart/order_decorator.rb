@@ -21,7 +21,7 @@ module ShoppingCart
   
     def shipping
       return 0.to_f if delivery_id.nil?
-      Delivery.find_by(id: delivery_id)&.price
+      ShoppingCart::Delivery.find_by(id: delivery_id)&.price
     end
   
     def total_without_delivery
@@ -30,7 +30,8 @@ module ShoppingCart
   
     def order_total
       order_total = subtotal - coupon_discount
-      order_total += delivery_id.nil? ? 0 : Delivery.find(delivery_id).price
+      order_total += delivery_id.nil? ? 0 : ShoppingCart::Delivery.find(delivery_id).price
       order_total
     end
+  end
 end

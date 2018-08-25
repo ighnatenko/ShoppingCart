@@ -1,5 +1,7 @@
-module ShoppingCart
-  module CurrentOrder
+module ShoppingCart::Concerns::CurrentOrder
+  extend ActiveSupport::Concern
+
+  included do
     def present_order
       @current_order ||= order_from_current_user || order_from_session
       return unless @current_order.nil? || !@current_order.in_progress?
@@ -15,12 +17,12 @@ module ShoppingCart
     end
 
     def order_from_session
-      Order.find_by(id: session[:order_id])
+      ShoppingCart::Order.find_by(id: session[:order_id])
     end
 
     def new_order
       tracking_number = "R#{Time.now.strftime('%d%m%y%H%M%S')}"
-      order = Order.create(user: current_user, tracking_number: tracking_number)
+      order = ShoppingCart::Order.create(user: current_user, tracking_number: tracking_number)
       session[:order_id] = order.id
       order
     end

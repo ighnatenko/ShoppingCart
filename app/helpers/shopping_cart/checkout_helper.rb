@@ -1,24 +1,22 @@
 module ShoppingCart
   # CheckoutHelper
   module CheckoutHelper
-    def try_nil_or_invalid?(object)
-      object.nil? || object.invalid?
+    def user_order
+      current_user.orders.last
     end
 
     def valid_step
       case true
-      when valid_address? then :address
-      when try_nil_or_invalid?(current_user.orders.last.delivery) then :delivery
-      when try_nil_or_invalid?(current_user.orders.last.credit_card) then :payment
+      when empty_address?(user_order) then :address
+      when user_order.delivery.nil? then :delivery
+      when user_order.credit_card.nil? then :payment
       else :payment
       end
     end
 
-    def valid_address?
-      try_nil_or_invalid?(current_user.orders.last.addresses
-        .find_by_address_type(:billing)) ||
-        try_nil_or_invalid?(current_user.orders.last.addresses
-        .find_by_address_type(:shipping))
+    def empty_address?(order)
+      order.addresses.find_by_address_type(:billing).nil? ||
+        order.addresses.find_by_address_type(:shipping).nil?
     end
   end
 end

@@ -4,7 +4,7 @@
   %h1= t('cart.empty_cart')
   %br
   .text-center
-    = link_to t('cart.back_to_store'), root_path, class: 'btn btn-default mb-20'
+    = link_to t('cart.back_to_store'), main_app.root_path, class: 'btn btn-default mb-20'
 - else    
   .visible-xs
     - @items.each do |item|
@@ -25,10 +25,10 @@
               %span.in-grey-600= t('cart.quantity') 
             %td
               .input-group
-                = link_to cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                = link_to shopping_cart.cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
                   %i.fa.fa-minus.line-heaght-40
                 %input.form-control.quantity-input{type: "text", value: item.decorate.quantity_in_cart(@order)}
-                = link_to cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
+                = link_to shopping_cart.cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
                   %i.fa.fa-plus.line-heaght-40
           %tr
             %td
@@ -59,15 +59,15 @@
             %span.font-16.in-gold-500= "€#{item.decorate.price}"
           %td
             .input-group
-              = link_to cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
+              = link_to shopping_cart.cart_decrement_item_path(book_id: item.id), method: :put, class: 'input-link' do
                 %i.fa.fa-minus.line-heaght-40
               %input.form-control.quantity-input{type: "text", value: item.decorate.quantity_in_cart(@order)}
-              = link_to cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
+              = link_to shopping_cart.cart_increment_item_path(book_id: item.id), method: :put, class: 'input-link' do
                 %i.fa.fa-plus.line-heaght-40
           %td
             %span.font-16.in-gold-500= "€#{item.decorate.total_price(@order)}"
           %td
-            = link_to(cart_path(book_id: item.id), method: :delete, class: 'close general-cart-close', 'aria-label': "Close") do
+            = link_to(shopping_cart.cart_path(book_id: item.id), method: :delete, class: 'close general-cart-close', 'aria-label': "Close") do
               %span{'aria-hidden': "true"} &times;
   .general-order-wrap
     .row
@@ -78,8 +78,8 @@
           = render 'coupon'
       = render 'order_summary', order: @order
   - if user_signed_in? && !@order.books.count.zero?
-    = link_to checkout_index_path do
+    = link_to shopping_cart.checkout_index_path do
       %button.btn.btn-default.mb-20.hidden-xs.center-block= t('checkout.checkout')
   - else
-    = link_to customer_index_path do
+    = link_to main_app.customer_index_path do
       %button.btn.btn-default.mb-20.hidden-xs.center-block= t('checkout.checkout')

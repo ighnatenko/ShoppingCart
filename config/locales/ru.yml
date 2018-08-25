@@ -1,0 +1,82 @@
+ru:
+  checkout:
+    cvv_tooltip: 3 цифры секретного кода на вашей карте
+    back_to_tore: Назад в Магазин
+    edit: редактировать
+    place_order: Продолжить
+    cvv: CVV
+    expiration_date: MM / YY
+    card_name: Название карты
+    card_number: Номер карты
+    save: Сохранить и продолжить
+    payment_info: Информация об оплате
+    shipments: Отгрузки
+    confirmation: "Подтверждение заказа было отправлено на адрес %{email}"
+    thank_for_order: Спасибо за ваш заказ!
+    checkout: Оформить
+    address: Адрес
+    delivery: Доставка
+    payment: Оплата
+    confirm: Подтвердить
+    complete: Завершить
+    use_billing_adress: Использовать платежный адрес
+    shipping_address: Адрес доставки
+    required: Все поля обязательны для заполнения
+    billing_address: Адрес выставления счетов
+  cart:
+    cart: Корзина
+    credit_card:
+      title: Кредитная карта
+      method: Доставка
+      days: Количество дней
+    total: Всего
+    empty_cart: Пустая корзина
+    back_to_store: Вернуться в магазин
+    checkout: Оформить заказ
+    order_total: Всего
+    shipping: Доставка
+    coupon: Купон
+    price: Цена
+    quantity: Количество
+    product: Продукт
+    subtotal: Цена книг
+    order_summary: Сводка заказов
+    apply_coupon: Применить купон
+    enter_coupon: Введите свой код
+    alredy_added: Книга уже добавлена
+    successful_added: Книга успешно добавлена
+    removed: Книга удалена из корзины
+  orders:
+    do_not_have_order: У вас нет заказа
+    all: Все
+    in_progress: В процессe
+    in_delivery: Отправлен
+    delivered: Доставлен
+    mailer:
+      title: Подтвердите заказ
+      confirm_message: Чтобы подтвердить заказ, просто следуйте по этой ссылке
+    order: Заказ
+    shipments: Отгрузки
+    sort_by: Сортировать по
+    title: Мои заказы
+    status: Статус
+    completed_at: Дата заказа
+    number: Номер
+    successful: Успешный заказ
+    not_exist: Извините. Заказ не существует
+  address:
+    successful:
+      create: Успешно создан адрес
+      update: Успешно обновлен адрес
+    failure:
+      create: Адрес не создан
+      update: Адрес не обновляется   
+    inputs_fields:
+      phone: Телефон
+      first_name: Имя
+      last_name: Фамилия
+      address: Адрес
+      city: Город
+      zip: Zip
+      country: Страна
+      phone_example: Пример +355 66 123 4567        

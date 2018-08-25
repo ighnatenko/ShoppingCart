@@ -1,18 +1,24 @@
+require 'rubygems'
+require 'aasm'
+require 'bootstrap-sass'
+require 'coffee-rails'
+require 'country_select'
+require 'font-awesome-rails'
+require 'haml'
+require 'jquery-rails'
+require 'draper'
+require 'wicked'
+require 'rectify'
+require 'rails-i18n'
+require 'sass-rails'
+require 'simple_form'
+
 module ShoppingCart
   # Engine
   class Engine < ::Rails::Engine
     isolate_namespace ShoppingCart
 
-    # require 'devise'
-    # require 'wicked'
-    # require 'haml-rails'
+    config.autoload_paths << File.expand_path('lib/shopping_cart/engine', __dir__)
 
-    # config.generators do |g|
-    #   g.template_engine :haml
-    #   g.test_framework :rspec, fixture: false
-    #   g.fixture_replacement :factory_bot, dir: 'spec/factories'
-    #   g.assets false
-    #   g.helper false
-    # end
   end
 end

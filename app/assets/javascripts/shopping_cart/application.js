@@ -15,4 +15,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require shopping_cart/checkout_address
+//= require shopping_cart/checkout_delivery
 //= require_tree .

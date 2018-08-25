@@ -5,7 +5,7 @@
   .general-cart-item.divider-lg-bottom.mb-30
     = form_tag(wizard_path, method: :put) do
       %table.table
-        - @delivery_service.deliveries.each do |delivery|
+        - @deliveries.each do |delivery|
           %tr
             %td.col-half
               %span.in-grey-600= t('cart.credit_card.method')
@@ -42,7 +42,7 @@
           %th
             %span.in-grey-600= t('cart.price')
       %tbody
-        - @delivery_service.deliveries.each do |delivery|
+        - @deliveries.each do |delivery|
           %tr
             %td
               .form-group.radio.mt-0.mb-0

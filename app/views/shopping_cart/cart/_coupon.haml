@@ -1,4 +1,4 @@
-= simple_form_for(:coupon, url: coupons_path, method: :post) do |f|
+= simple_form_for(:coupon, url: shopping_cart.coupons_path, method: :post) do |f|
   .input-group.general-input-group
     = f.input :code, placeholder: t('cart.enter_coupon'), input_html: { class: 'mb-30' },
         label_html: { class: 'input-label' }, label: t('cart.enter_coupon')

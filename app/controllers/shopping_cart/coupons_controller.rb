@@ -2,14 +2,13 @@ require_dependency 'shopping_cart/application_controller'
 
 module ShoppingCart
   # CouponsController
-  class CouponsController < ApplicationController
+  class CouponsController < ShoppingCart::ApplicationController
     def create
-      coupon = Coupon.find_by(code: coupon_params[:code])
-      return redirect_to cart_path, alert: t('coupon.not_exist') unless coupon
-      return redirect_to cart_path, alert: t('coupon.used') if coupon.order
-      @order = @current_order
-      @order.update(coupon: coupon)
-      redirect_to cart_path, notice: t('coupon.added')
+      ShoppingCart::UseCoupon.call(coupon_params, @current_order) do
+        on(:ok) { redirect_to cart_path, notice: t('coupon.added') }
+        on(:not_exist) { redirect_to cart_path, alert: t('coupon.not_exist') }
+        on(:already_used) { redirect_to cart_path, alert: t('coupon.used') }
+      end
     end
 
     private

@@ -5,7 +5,7 @@
     = params[:state] ? t("orders.#{params[:state].to_s}") : t('orders.all')  
     %i.fa.fa-angle-down.dropdown-icon.pull-right
   %ul.dropdown-menu
-    %li= link_to t('orders.all'), orders_path
-    - Order.aasm_states.each do |state|
-      %li= link_to t("orders.#{state.to_s}"), orders_path(state: state)    
+    %li= link_to t('orders.all'), shopping_cart.orders_path
+    - ShoppingCart::Order.aasm_states.each do |state|
+      %li= link_to t("orders.#{state.to_s}"), shopping_cart.orders_path(state: state)    
 = render 'order_items', orders: @orders

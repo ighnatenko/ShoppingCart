@@ -1,0 +1,82 @@
+en:
+  checkout:
+    cvv_tooltip: 3-digit security code, usually found on the back of your card.
+    back_to_tore: Back to Store
+    edit: edit
+    place_order: Place Order
+    cvv: CVV
+    expiration_date: MM / YY
+    card_name: Name on Card
+    card_number: Card Number
+    save: Save and Continue
+    payment_info: Payment Information
+    shipments: Shipments
+    confirmation: "An order confirmation has been has been sent to %{email}"
+    thank_for_order: Thank You for your Order!
+    checkout: Checkout
+    address: Address
+    delivery: Delivery
+    payment: Payment
+    confirm: Confirm
+    complete: Complete
+    use_billing_adress: Use Billing Adress
+    shipping_address: Shipping Address
+    required: all fields are required
+    billing_address: Billing Address
+  cart:
+    cart: Cart
+    credit_card:
+      title: Credit Card
+      method: Method
+      days: Days
+    total: Total
+    empty_cart: Empty cart
+    back_to_store: 'Back to Store'
+    checkout: Checkout
+    order_total: Order Total
+    shipping: Shipping
+    coupon: Coupon
+    price: Price
+    quantity: Quantity
+    product: Product
+    subtotal: SubTotal
+    order_summary: Order Summary
+    apply_coupon: Apply Coupon
+    enter_coupon: Enter Your Coupon Code
+    alredy_added: Book alredy added
+    successful_added: Book added successful
+    removed: Book successful removed from cart
+  orders:
+    do_not_have_order: You don't have an order
+    all: All
+    in_progress: In progress
+    in_delivery: Sent
+    delivered: Delivered
+    mailer:
+      title: Confirm your order
+      confirm_message: To confirm your order, just follow this link
+    order: Order
+    shipments: Shipments
+    sort_by: Sort by
+    title: My Orders
+    status: Status
+    completed_at: Completed at
+    number: Number
+    successful: Successful order
+    not_exist: Sorry. Order does not exist
+  address:
+    successful:
+      create: Address successful created
+      update: Address successful updated
+    failure:
+      create: Address does not created
+      update: Address does not updated    
+    inputs_fields:
+      phone: Phone
+      first_name: First Name
+      last_name: Last Name
+      address: Address
+      city: City
+      zip: Zip
+      country: Country
+      phone_example: Example +355 66 123 4567     

@@ -2,7 +2,7 @@
 = render 'steps', number: 3
 %h3.general-subtitle= t('cart.credit_card.title')
 = form_tag(wizard_path, method: :put, class: 'max-600 mb-80') do
-  = simple_fields_for(:credit_card, @payment_service.credit_card) do |f|
+  = simple_fields_for(@form) do |f|
     .form-group
       = f.input :number, input_html: { class: 'form-control' }, label: t('checkout.card_number'),
       placeholder: t('checkout.card_number'), label_html: { class: 'control-label input-label' }
