@@ -21,6 +21,11 @@ Or install it yourself as:
 $ gem install shopping_cart
 ```
 
+Run to install:
+```bash
+rails g shopping_cart:install
+```
+
 ## Contributing
 Contribution directions go here.
 
